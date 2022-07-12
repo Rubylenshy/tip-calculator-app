@@ -50,18 +50,18 @@ html{
     border: none;
     margin: 0 10px 0 0;
     height:18em;
-    padding: 10px;
+    padding: 5px 10px;
     width: 50%;
 }
 .bill span{
     font-size: small;
 }
 .bill input{
-    height: 2.5em;
+    height: 2.0em;
     width: 100%;
     text-align: right;
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 24px;
     background-color: rgba(189, 228, 235, 0.4);
     background: url(/images/icon-dollar.svg) rgba(189, 228, 235, 0.4) no-repeat 10px ;
     background-size: 10px;
@@ -90,11 +90,11 @@ html{
     font-size: small;
 }
 .people input{
-    height: 2.5em;
+    height: 2.0em;
     width: 100%;
     text-align: right;
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 24px;
     background-color: rgba(189, 228, 235, 0.4);
     background: url(/images/icon-person.svg) rgba(189, 228, 235, 0.4) no-repeat 10px ;
     background-size: 10px;
