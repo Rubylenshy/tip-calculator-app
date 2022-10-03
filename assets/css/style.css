@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    font-family: 'Space Mono', monospace;
+}
+html{
+    background-color: rgba(121, 187, 199, 0.4);
+}
+body{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.splitter{
+    margin-top: 40px;
+    padding-bottom: 20px;
+    text-align: center; 
+}
+.card-body{
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.left-card{
+    border: none;
+    margin: 0 10px 0 0;
+    height: 18em;
+    padding: 5px 10px;
+    width: 50%;
+    min-width: 300px;
+}
+.bill label{
+    display: flex;
+    justify-content: space-between;
+}
+.bill span{
+    font-size: small;
+}
+#billerror{
+    color: red;
+    text-align: right;
+    display: none;
+}
+.bill input{
+    height: 1.8em;
+    width: 100%;
+    text-align: right;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: rgba(189, 228, 235, 0.4);
+    background: url(../images/icon-dollar.svg) rgba(189, 228, 235, 0.4) no-repeat 10px;
+    background-size: 10px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.bill input:focus,
+.bill input:hover{
+    border: 2px solid rgb(75, 177, 155);
+}
+.select-tip{
+    font-size: small;
+    margin: 15px 0 5px;
+}
+.tips{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.people label{
+    display: flex;
+    justify-content: space-between;
+}
+.people span{
+    font-size: small;
+}
+
+#peopleerror{
+    color: red;
+    text-align: right;
+    display: none;
+}
+.people input{
+    height: 1.8em;
+    width: 100%;
+    text-align: right;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: rgba(189, 228, 235, 0.4);
+    background: url(../images/icon-person.svg) rgba(189, 228, 235, 0.4) no-repeat 10px ;
+    background-size: 10px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 15px;
+    margin: 5px 0 0;
+    cursor: pointer;
+}
+.people input:focus,
+.people input:hover{
+    border: 2px solid rgb(75, 177, 155);
+}
+.box{
+    background-color: rgb(9, 35, 39);
+    color: white;
+    padding: 10px 20px;
+    margin: 0.5em 0.5em 0 0;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.05em;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.box:hover{
+    background-color: rgb(15, 112, 107);
+}
+#custom{
+    background-color: transparent;
+    color: grey;
+    text-align: center;
+    border: none;
+    width: 80px;
+    margin: 0.5em;
+}
+.active-btn{
+    background-color: rgb(10, 87, 83);
+    font-weight: bolder;
+}
+input.box::placeholder {
+    color: white;
+}
+.right-card{
+    background-color: rgb(11, 50, 56);
+    border-radius: 15px;
+    height: 18em;
+    padding: 30px 30px 20px;
+    width: 50%;
+    min-width: 300px;
+}
+.right-card div p{
+    margin: 20px auto 12px 0;
+}
+.right-card div p strong{
+    color: white;
+}
+.right-card div p span{
+    color: grey;
+}
+.right-card div .display-output{
+    width: 50%;
+    height: 1.8em;
+    padding: 20px 0;
+    color: rgb(96, 202, 179);
+    text-align: right;
+    font-size: 22pt;
+    font-weight: bold;
+}
+.tip-dipslay{
+    display: flex;
+    justify-content: space-between;
+}
+.right-card button{
+    margin: 30px 0;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(75, 177, 155);
+    font-weight: bold;
+    cursor: pointer;
+}
+.right-card button:hover{
+    background-color: rgb(148, 202, 190);
+}
+
+@media (max-width: 600px){
+    body{
+        position: relative;
+        top: 50px;
+        left: 0;
+        transform: translate(0);
+    }
+    .card-body{
+        height: 100% !important;
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 10px;
+        margin: 0 !important;
+    }
+    .left-card{
+        min-width: 100% !important;
+        margin-bottom: 30px !important;
+    }
+    .right-card{
+        min-width: 100% !important;
+        height: 100%;
+    }
+    .tips{
+        width: 100%;
+    }
+}
+
+@media (max-width: 367px){
+    .left-card{
+        margin-bottom: 30px !important;
+    }
+    .tips{
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 329px){
+    .left-card{
+        margin-bottom: 70px !important;
+    }
+    .box{
+        width: 45% !important;
+    }
+}
