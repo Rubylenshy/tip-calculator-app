@@ -1,165 +1,171 @@
 
-const billInput = document.querySelector("bill");
-const peopleInput = document.querySelector("people");
-const tipPer = document.getElementById("tip-amount");
-const totalPer = document.getElementById("total-amount");
-const tips = document.querySelectorAll('.tip');
+const appEl = document.querySelector("main");
 
-if (billInput) {
-  billInput.addEventListener('input', billInputFun);
+const tipOptions = document.querySelectorAll("input[name='tip']");
+const boxInput = document.querySelectorAll(".box");
+const customEl = document.getElementById("customEl");
+const customRadio = customEl.querySelector("input[type='radio']");
+const customInput = customEl.querySelector("input[type='number']");
+
+const totalEl = document.getElementById("total-amount");
+const amountEl = document.getElementById("tip-amount");
+
+const resetBtn = document.querySelector("button[type='reset']");
+ 
+const values = { bill: 0, tip: 0, people: 0 };
+
+// event listener for inputs
+
+appEl.addEventListener("input", function(event) {
+  const billVal = Number(document.getElementById("bill").value)
+
+  if (event.target.id === "people") ;
+  
+  values.bill = billVal < 100000000000000000n && billVal
+  values.people = Number(document.getElementById("people").value)
+
+  checkEmptyValues()
+})
+
+function checkEmptyValues(){
+  Object.values(values).some( elem => elem === 0 || NaN) 
+  ? clearDisplay() : calculateTip();
 }
 
-if (peopleInput) {
-  peopleInput.addEventListener('input', peopleInputFun);
+function calculateTip() {
+  const { bill, tip, people } = values
+
+  resetBtn.disabled = false
+
+  const tipPerPerson = (bill * (tip / 100)) / people;
+  const totalPerPerson = tipPerPerson + (bill / people);
+
+  if (tipPerPerson && totalPerPerson) {
+    amountEl.textContent =
+      Number.isFinite(tipPerPerson) &&
+      !Number.isNaN(tipPerPerson) &&
+      `$${tipPerPerson.toFixed(2)}`;
+    totalEl.textContent =
+      Number.isFinite(totalPerPerson) &&
+      !Number.isNaN(totalPerPerson) &&
+      `$${totalPerPerson.toFixed(2)}`;
+  }
+  
 }
 
-tips.forEach(function(val){
-  val.addEventListener("click", handleClick);
+tipOptions.forEach((btn) =>
+  btn.addEventListener("change", () => selectTip(btn.value))
+);
+
+customEl.addEventListener("input", (event) => {
+  event.preventDefault();
+  tipOptions.forEach((btn) => btn.checked = false);
+  customRadio.value = event.target.value  
+  handleCustom(event.target.value);
 });
 
-if (billInput) {
-  billInput.value = "0.0";  
+customEl.addEventListener("click", () => handleCustom(customRadio.value));
+
+function handleCustom(value) {
+  customRadio.checked = true;
+  selectTip(value)
 }
 
-if (peopleInput) {
-  peopleInput.value = "1";
+function selectTip(value) {
+  values.tip = Number(value)
+  checkEmptyValues()
 }
 
-tipPer.innerText = "$" + (0.0).toFixed(2);
-totalPer.innerText = "$" + (0.0).toFixed(2);
 
-let billValue = 0.0;
-let peopleValue = 1;
+window.addEventListener("load", reset);
+resetBtn.addEventListener("click", reset);
 
-function billInputFun() {
-    billValue =parseFloat(billInput.value);
-    console.log(billValue);
+function reset() {
+  appEl.querySelector("form").reset()
+  Object.keys(values).map( key => values[key] = 0 );
+  clearDisplay();
+  appEl.focus()
 }
 
-function peopleInputFun() {
-  if (peopleValue) {
-    peopleValue =parseFloat(peopleInput.value);  
-  }
-  console.log(peopleValue);
+function clearDisplay() {
+  totalEl.textContent = "$0.00";
+  amountEl.textContent = "$0.00";
+  resetBtn.disabled = true
 }
 
-function handleClick(event) {
-  tips.forEach(function(val){
-    val.ClassList .remove('active-btn');
-    if (event.target.innerText = val.innerHTML){
-      val.classList.add('active-btn');
-    };
-    tipValue = parseFloat(val.innerHTML)/100;
-  })
-  console.log(tipValue);
-}
+// const billInput = document.querySelector("#bill");
+// const peopleInput = document.querySelector("#people");
+// const tipAmount = document.getElementById("tip-amount");
+// const totalAmount = document.getElementById("total-amount");
+// const tips = document.querySelectorAll('.box');
+// const error_bill = document.querySelector('#billerror')
+// const error_people = document.querySelector('#peopleerror')
+// const input = document.querySelectorAll('input')
 
-// let bill = document.getElementById("bill");
-// let people = document.getElementById("people");
-// let tips = document.getElementsByClassName("tip");
-// let tipCustom = document.getElementById("custom");
-// let reset = document.getElementById("reset");
-// let tipNotCustom = 0;
+// const resetBtn = document.querySelector("button[type='reset']")
 
-// console.log(people);
-
-// bill.addEventListener("keyup", evaluate);
-// people.addEventListener("keyup", evaluate);
-// tipCustom.addEventListener("keyup", evaluate);
-// reset.addEventListener("click", resetForm, true);
-// for (let i = 0; i < 5; i++) {
-//   tips[i].addEventListener("click", evaluate);
-// }
-
-// function evaluate() {
-//   activeBtnReset();
-//   if (!evaluateInput(bill, "billerror")) {
-//     return;
+// // Reset button disabled
+// for (let i = 0; i < input.length; i++) {
+  
+//   input[i].onkeyup = ()=>{
+//     resetBtn.disabled = false
 //   }
-//   if (!evaluateInput(people, "peopleerror")) {
-//     return;
-//   }
-//   if (evaluateInput(tipCustom, "")) {
-//     compute(
-//       parseFloat(tipCustom.value / 100),
-//       parseFloat(bill.value),
-//       parseFloat(people.value)
-//     );
-//   } else {
-//     getTips();
-//     compute(
-//       parseFloat(tipNotCustom),
-//       parseFloat(bill.value),
-//       parseFloat(people.value)
-//     );
+//   input[i].onblur = ()=>{
+//     resetBtn.disabled = true
 //   }
 // }
 
-//  function activebtnReset() {
-//    if (
-//      bill.value !== "" ||
-//      bill.value > 0 ||
-//      people.value !== "" ||
-//      people.value > 0
-//    ) {
-//      reset.style.cursor = "pointer";
-//      reset.classList.add("active-btn");
-//      reset.addEventListener("click", resetForm, true);
-//    } else {
-//      reset.style.cursor = "not-allowed";
-//      reset.classList.remove("active-btn");
-//      reset.removeEventListener("click", resetForm, true);
-//    }
-//  }
-
-// function getTipRadio() {
-//   for (let i = 0; i < 5; i++) {
-//     if (tips[i].checked) {
-//       tipNotCustom = tips[i].value;
+// for (let i = 0; i < tips.length; i++) {
+  
+//   tips[i].onkeyup = (tip)=>{
+//     tip.preventDefault();
+  
+//     if (billInput.value == 0) {
+//       document.getElementById('billerror').style.display = 'block'
+//     }else{
+//       document.getElementById('billerror').style.display = 'none'
+//     }
+//     if (peopleInput.value == 0) {
+//       document.getElementById('peopleerror').style.display = 'block'
+//     }else{
+//       document.getElementById('peopleerror').style.display = 'none'
 //     }
 //   }
+
+//   // tip[i].onblur = ()=>{
+//   //   document.getElementById('peopleerror').style.display = 'none'
+//   //   document.getElementById('billerror').style.display = 'none'
+//   // }
 // }
 
-//  function evaluateInput(type, ID) {
-//    console.log(type);
-//    if (ID === "") {
-//      if (type.value > 0) {
-//        clearTips();
-//        return true;
-//      }
-//      return false;
-//    }
-//    if (type.value === "" || type.value <= 0) {
-//      document.getElementById(`${ID}`).style.display = "block";
-//      document.getElementById("tipAmount").innerText = "0.00";
-//      return false;
-//    } else {
-//      document.getElementById(`${ID}`).style.display = "none";
-//      return true;
-//    }
-//  }
 
-// function compute(fTip, fBill, fPeople) {
-//   let tip_amount = (fBill * fTip) / fPeople;
-//   let total_amount = (fBill * fTip + fBill) / fPeople;
-//   document.getElementById("tip-amount").innerText = tip_amount.toFixed(2);
-//   document.getElementById("total-amount").innerText = total_amount.toFixed(2);
-// }
 
-// function clearTips() {
-//   for (let i = 0; i < 5; i++) {
-//     tips[i].checked = false;
+// function calculateTip() {
+
+//   const tipPerPerson = (bill) / people;
+//   const totalPerPerson = tipPerPerson + (bill / people);
+
+//   if (tipPerPerson && totalPerPerson) {
+//     tipAmount.textContent =
+//       Number.isFinite(tipPerPerson) &&
+//       !Number.isNaN(tipPerPerson) &&
+//       `$${tipPerPerson.toFixed(2)}`;
+//     totalAmount.textContent =
+//       Number.isFinite(totalPerPerson) &&
+//       !Number.isNaN(totalPerPerson) &&
+//       `$${totalPerPerson.toFixed(2)}`;
 //   }
+  
 // }
 
-// function resetForm() {
-//   bill.value = "";
-//   people.value = "";
-//   clearTips();
-//   tipCustom.value = "";
-//   document.getElementById("tip-amount").innerText = "0.00";
-//   document.getElementById("total-amount").innerText = "0.00";
-//   document.getElementById("peopleerror").style.display = "none";
-//   document.getElementById("billerror").style.display = "none";
-//   activeBtnReset();
+// // reset function and event handler
+
+// resetBtn.addEventListener("click", ()=>{
+//   console.log('reset')
+// });
+
+// function reset() {
+//   tipAmount.textContent = "$0.00";
+//   totalAmount.textContent = "$0.00";
+//   resetBtn.disabled = true
 // }

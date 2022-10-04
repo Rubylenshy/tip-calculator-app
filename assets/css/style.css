@@ -1,7 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
 
+
+:root{
+    --strong-cyan: hsl(172, 67%, 45%);
+
+    --very-dark-cyan: hsl(183, 100%, 15%);
+    --dark-grayish-cyan: hsl(186, 14%, 43%);
+    --grayish-cyan: hsl(184, 14%, 56%);
+    --light-grayish-cyan: hsl(185, 41%, 84%);
+    --very-light-grayish-cyan: hsl(189, 41%, 97%);
+    --white: hsl(0, 0%, 100%);
+    --cyan-900: hsl(183, 79%, 24%);
+    --cyan-400: hsl(172, 67%, 45%);
+}
+
+
 *{
     box-sizing: border-box;
+    margin: 0;
     padding: 0;
     font-family: 'Space Mono', monospace;
 }
@@ -14,9 +30,32 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.bill label, .people label{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.bill input,
+.people input{
+    width: 100%;
+    text-align: right;
+    font-size: 20px;
+    background-color: rgba(189, 228, 235, 0.4);
+    background-size: 10px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+input:focus,
+input:hover{
+    outline: 2px solid rgb(75, 177, 155);
+}
+
+
 .splitter{
-    margin-top: 40px;
-    padding-bottom: 20px;
+    padding-bottom: 60px;
     text-align: center; 
 }
 .card-body{
@@ -30,10 +69,9 @@ body{
 .left-card{
     border: none;
     margin: 0 10px 0 0;
-    height: 18em;
     padding: 5px 10px;
     width: 50%;
-    min-width: 300px;
+    min-width: 320px;
 }
 .bill label{
     display: flex;
@@ -42,40 +80,24 @@ body{
 .bill span{
     font-size: small;
 }
-#billerror{
+#billerror, #peopleerror{
     color: red;
     text-align: right;
     display: none;
 }
 .bill input{
-    height: 1.8em;
-    width: 100%;
-    text-align: right;
-    font-weight: bold;
-    font-size: 20px;
-    background-color: rgba(189, 228, 235, 0.4);
     background: url(../images/icon-dollar.svg) rgba(189, 228, 235, 0.4) no-repeat 10px;
-    background-size: 10px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    padding: 0 15px;
-    cursor: pointer;
-}
-.bill input:focus,
-.bill input:hover{
-    border: 2px solid rgb(75, 177, 155);
 }
 .select-tip{
     font-size: small;
-    margin: 15px 0 5px;
+    margin: 15px 0 10px;
 }
 .tips{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .people label{
     display: flex;
@@ -85,67 +107,98 @@ body{
     font-size: small;
 }
 
-#peopleerror{
-    color: red;
-    text-align: right;
-    display: none;
-}
 .people input{
-    height: 1.8em;
-    width: 100%;
-    text-align: right;
-    font-weight: bold;
-    font-size: 20px;
-    background-color: rgba(189, 228, 235, 0.4);
     background: url(../images/icon-person.svg) rgba(189, 228, 235, 0.4) no-repeat 10px ;
-    background-size: 10px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    padding: 0 15px;
-    margin: 5px 0 0;
-    cursor: pointer;
-}
-.people input:focus,
-.people input:hover{
-    border: 2px solid rgb(75, 177, 155);
 }
 .box{
-    background-color: rgb(9, 35, 39);
+    background-color: var(--very-dark-cyan);
     color: white;
-    padding: 10px 20px;
     margin: 0.5em 0.5em 0 0;
     width: 30%;
     display: flex;
+    align-items: center;
     justify-content: center;
-    font-size: 1.05em;
+    font-size: 1.25em;
     border: none;
     border-radius: 5px;
-    font-weight: bold;
     cursor: pointer;
 }
 .box:hover{
     background-color: rgb(15, 112, 107);
 }
-#custom{
+.box.active{
+    background: var(--cyan-400);
+    color: var(--very-dark-cyan);
+    font-weight: bold;
+    border: 1px dotted var(--cyan-900);
+}
+[type=number] {
+    width: 100%;
+    font-family: var(--ff-primary);
+    background-color: var(--clr-neutral-100);
+    color: var(--clr-neutral-900);
+    font-size: var(--fs-input);
+    border: 0.2rem solid var(--clr-neutral-100);
+    margin: 0;
+    padding: 0.18rem 0.8rem 0.18rem 0;
+    text-align: right;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    -moz-appearance: textfield;
+}
+  
+[type=radio] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    outline: 0;
+    position: absolute;
+    top: auto;
+    left: 0;
+    z-index: 10;
+}
+.tips label{
+    padding: 10px 20px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 5px;
+}
+#customEl{
     background-color: transparent;
     color: grey;
+    width: 30%;
     text-align: center;
     border: none;
-    width: 80px;
-    margin: 0.5em;
+    margin: 13px 0.5em 0 0;
 }
-.active-btn{
-    background-color: rgb(10, 87, 83);
-    font-weight: bolder;
+#customEl input[type=number]{
+    padding: 8px 10px;
+    font-size: 1.25em;
+    color: var(--very-dark-cyan);
+    width: 100%;
 }
-input.box::placeholder {
-    color: white;
+#customEl label{
+    padding: 0;
 }
+.box [type=radio]:checked + label {
+    background-color: var(--cyan-400);
+    color: var(--very-dark-cyan);
+    outline: 0;
+    border: 0;
+}
+.box [type=radio]:focus + label {
+    outline: 0;
+}
+
+
 .right-card{
     background-color: rgb(11, 50, 56);
     border-radius: 15px;
-    height: 18em;
     padding: 30px 30px 20px;
     width: 50%;
     min-width: 300px;
@@ -165,21 +218,20 @@ input.box::placeholder {
     padding: 20px 0;
     color: rgb(96, 202, 179);
     text-align: right;
-    font-size: 22pt;
-    font-weight: bold;
+    font-size: 30px;
 }
 .tip-dipslay{
     display: flex;
     justify-content: space-between;
 }
 .right-card button{
-    margin: 30px 0;
+    margin: 110px 0 0;
     width: 100%;
     padding: 10px;
     border-radius: 5px;
+    font-size: 18px;
     border: none;
     background-color: rgb(75, 177, 155);
-    font-weight: bold;
     cursor: pointer;
 }
 .right-card button:hover{
@@ -189,44 +241,41 @@ input.box::placeholder {
 @media (max-width: 600px){
     body{
         position: relative;
-        top: 50px;
+        top: 100px;
         left: 0;
         transform: translate(0);
     }
     .card-body{
-        height: 100% !important;
+        height: 100%;
         width: 100%;
         flex-wrap: wrap;
         padding: 10px;
-        margin: 0 !important;
+        margin-bottom: 50px;
     }
     .left-card{
-        min-width: 100% !important;
-        margin-bottom: 30px !important;
+        min-width: 100%;
+        margin-bottom: 30px;
     }
     .right-card{
-        min-width: 100% !important;
+        min-width: 100%;
         height: 100%;
     }
-    .tips{
-        width: 100%;
+    .right-card button{
+        margin-top: 20px;
     }
 }
 
 @media (max-width: 367px){
     .left-card{
-        margin-bottom: 30px !important;
-    }
-    .tips{
-        width: 100% !important;
+        margin-bottom: 30px;
     }
 }
 
-@media (max-width: 329px){
-    .left-card{
-        margin-bottom: 70px !important;
-    }
+@media (max-width: 339px){
     .box{
-        width: 45% !important;
+        width: 45%;
+    }
+    #customEl{
+        width: 45%;
     }
 }

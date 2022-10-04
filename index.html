@@ -19,39 +19,65 @@
     <div class="left-card">
     <form class="bill">
       <label><span>Bill</span><span id="billerror">Can't be zero</span></label>
-      <input type="number" id="bill" title="bill" placeholder="0.00" value="0.00" min="0">
+      <input type="number" id="bill" title="bill" placeholder="0.00" >
     </form>
     
     <header class="select-tip">Select Tip %</header>
     <div class="tips">
-      <button type="button" class="tip box tip-5">5%</button>
-      <button type="button" class="tip box tip-10">10%</button>
-      <button type="button" class="tip box tip-15 active-btn">15%</button>
-      <button type="button" class="tip box tip-25">25%</button>
-      <button type="button" class="tip box tip-50">50%</button>
-      <input type="text" class="tip" id="custom" placeholder="Custom">
+      <div class="box">
+        <input type="radio" value="5" name="tip" id="five" />
+        <label for="five">5%</label>
+      </div>
+      <div class="box">
+        <input type="radio" value="10" name="tip" id="ten" />
+        <label for="ten">10%</label>
+      </div>
+      <div class="box">
+        <input type="radio" value="15" name="tip" id="fifteen" />
+        <label for="fifteen">15%</label>
+      </div>
+      <div class="box">
+        <input type="radio" value="25" name="tip" id="twentyfive" />
+        <label for="twentyfive">25%</label>
+      </div> 
+      <div class="box">
+        <input type="radio" value="50" name="tip" id="fifty" />
+        <label for="fifty">50%</label>
+      </div>
+      <div class="box-input" id="customEl">
+        <input type="radio" value="" name="tip" id="custom-radio" />
+        <label for="custom-input">
+          <!-- <span class="visually-hidden">Custom</span> -->
+          <input
+            type="number"
+            placeholder="Custom"
+            name="tip"
+            id="custom-input"
+            min="0"
+            tabindex="-1"
+          />
+        </label>
+      </div>
     </div>
     <form class="people">
       <label><span>Number of People</span><span id="peopleerror">Can't be zero</span></label>
-      <input type="number" id="people" title="people" placeholder="1" value="1" min="0">
+      <input type="number" id="people" title="people" placeholder="0" min="0">
     </form>
   </div>
   <div class="right-card">
     <div class="tip-dipslay">
     <p>
-      <strong>Tip Amount</strong><br>
-      <span>/ person</span>
+      <strong>Tip Amount</strong><br><span>/ person</span>
     </p>
-    <div class="display-output" id="tip-amount">$4.27</div>
+    <div class="display-output" id="tip-amount">$1.00</div>
     </div>
     <div class="tip-dipslay">
     <p>
-      <strong>Total</strong><br>
-      <span>/ person</span>
+      <strong>Total</strong><br><span>/ person</span>
     </p>
-    <div class="display-output" id="total-amount">$32.47</div>
+    <div class="display-output" id="total-amount">$12.00</div>
     </div>
-  <button type="reset">RESET</button>
+    <button type="reset" disabled>RESET</button>
   </div>
 </main>
 
