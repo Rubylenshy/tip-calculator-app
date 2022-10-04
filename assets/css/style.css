@@ -51,6 +51,14 @@ input:focus,
 input:hover{
     outline: 2px solid rgb(75, 177, 155);
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+  }
 
 
 .splitter{
